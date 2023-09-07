@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "642476182931",
+    "project_id": "test-11f0a",
+    "storage_bucket": "test-11f0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642476182931:android:0623e4ab69963928912c66",
+        "android_client_info": {
+          "package_name": "com.stc.movieshub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642476182931-ngqi6ugbdvuh2jm719hus65rsndlvje2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9F8l8Og5NHmHTBImSWre4MM6czx1lOaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642476182931-ngqi6ugbdvuh2jm719hus65rsndlvje2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
