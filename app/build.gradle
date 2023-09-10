@@ -9,9 +9,9 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
-def apikeyPropertiesFile = rootProject.file("local.properties")
-def apikeyProperties = new Properties()
-apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+//def apikeyPropertiesFile = rootProject.file("local.properties")
+//def apikeyProperties = new Properties()
+//apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdk 33
@@ -34,7 +34,7 @@ android {
             }
         }
 
-        buildConfigField("String", "MOVIESHUB_API_KEY", apikeyProperties['MOVIESHUB_API_KEY'])
+        buildConfigField("String", "MOVIESHUB_API_KEY", '"a9b10bac15ee3b19e4190352252ffe8b"')
     }
 
     buildTypes {
