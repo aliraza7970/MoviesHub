@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
+import com.stc.movieshub.data.local.MyListMovie
 import com.stc.movieshub.data.repository.GenreRepository
 import com.stc.movieshub.data.repository.FilmRepository
+import com.stc.movieshub.data.repository.WatchListRepository
 import com.stc.movieshub.model.Genre
 import com.stc.movieshub.model.Film
 import com.stc.movieshub.util.FilmType
@@ -28,6 +30,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val filmRepository: FilmRepository,
     private val genreRepository: GenreRepository,
+    private val repo: WatchListRepository
 ) : ViewModel() {
     private var _filmGenres = mutableStateListOf(Genre(null, "All"))
     val filmGenres: SnapshotStateList<Genre> = _filmGenres
@@ -40,6 +43,9 @@ class HomeViewModel @Inject constructor(
 
     private var _trendingMovies = mutableStateOf<Flow<PagingData<Film>>>(emptyFlow())
     val trendingMoviesState: State<Flow<PagingData<Film>>> = _trendingMovies
+
+    private val _watchList = mutableStateOf<Flow<List<MyListMovie>>>(emptyFlow())
+    val watchList: MutableState<Flow<List<MyListMovie>>> = _watchList
 
     init {
         refreshAll()
@@ -83,12 +89,25 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getWatchList(){
+        _watchList.value = repo.getFullWatchList()
+    }
+
     private fun getTrendingFilms(genreId: Int?, filmType: FilmType) {
         viewModelScope.launch {
             _trendingMovies.value = if (genreId != null) {
                 filmRepository.getTrendingFilms(filmType).map { results ->
                     results.filter { movie ->
+                        repo.addToWatchList(
+                            MyListMovie(mediaId = movie.id,
+                            imagePath = movie.posterPath,
+                            backDropImagePath = movie.posterPath,
+                            title = movie.title,
+                            releaseDate = movie.releaseDate,
+                            rating = movie.voteAverage,
+                            addedOn = movie.releaseDate))
                         movie.genreIds!!.contains(genreId)
+
                     }
                 }.cachedIn(viewModelScope)
             } else {

@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
-rootProject.name = "MovieHub"
+rootProject.name = "MoviesHub"
 include ':app'

@@ -7,8 +7,16 @@ import androidx.room.PrimaryKey
 data class MyListMovie(
     @PrimaryKey val mediaId: Int,
     val imagePath: String?,
+    val backDropImagePath: String?,
     val title: String,
     val releaseDate: String,
     val rating: Double,
     val addedOn: String
+)
+
+@Entity(tableName = "GenresList")
+data class GenresList(
+    @PrimaryKey val mediaId: Int,
+    val movieID: Int,
+    val genresId: Int
 )
